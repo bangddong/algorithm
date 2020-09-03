@@ -1,36 +1,57 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
-    /**
-     * 동전이 N개만큼 주어짐.
-     * 그 동전으로 만들어야할 합이 주어짐.
-     * N개 만큼 랜덤한 액수가 적힌 동전이 주어짐.
-     */
-    public static void main(String[] args) throws Exception{
+
+    static BufferedWriter bw;
+    static StringTokenizer st ;
+
+    public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
 
-        StringTokenizer st = new StringTokenizer(br.readLine());
+			/*
+			  time[][0] 은 시작시점을 의미
+			  time[][1] 은 종료시점을 의미
+			*/
+        int[][] time = new int[n][2];
 
-        int totCoin = Integer.parseInt(st.nextToken()); // 코인 갯수
-        int goalPrice = Integer.parseInt(st.nextToken()); // 목표 금액
-        int sumCoin = 0; // 필요한 동전의 합계
+        StringTokenizer st;
 
-        int[] kinds = new int[totCoin];
-        for (int i = 0; i < totCoin; i++) {
-            kinds[i] = Integer.parseInt(br.readLine());
+        for(int i = 0; i < n; i++) {
+            st = new StringTokenizer(br.readLine(), " ");
+            time[i][0] = Integer.parseInt(st.nextToken());	// 시작시간
+            time[i][1] = Integer.parseInt(st.nextToken());	// 종료시간
         }
+
+        // 끝나는 시간을 기준으로 정렬하기 위해 compare 재정의
+        Arrays.sort(time, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                // 종료시간이 같을 경우 시작시간이 빠른순으로 정렬해야한다.
+                if(o1[1] == o2[1]) {
+                    return o1[0] - o2[0];
+                }
+                return o1[1] - o2[1];
+            }
+        });
 
         int count = 0;
-        for (int i = (totCoin - 1); i >= 0; i--) {
-            if (goalPrice >= kinds[i]) {
-                count += (goalPrice / kinds[i]);
-                goalPrice = (goalPrice % kinds[i]);
+        int prev_end_time = 0;
+
+        for(int i = 0; i < n; i++) {
+            // 직전 종료시간이 다음 회의 시작 시간보다 작거나 같다면 갱신
+            if(prev_end_time <= time[i][0]) {
+                prev_end_time = time[i][1];
+                count++;
             }
         }
-        System.out.println(sumCoin);
-        br.close();
+
+        int ans = count;
+        System.out.println(ans);
     }
 }
