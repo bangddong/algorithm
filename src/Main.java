@@ -23,9 +23,8 @@ public class Main {
                 cnt++;
             }
         }
-
+        // 커밋 날라감
         System.out.println(cnt);
-
 
     }
 }
