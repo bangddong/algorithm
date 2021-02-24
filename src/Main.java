@@ -1,32 +1,36 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
     /**
-     * 사람이 N만큼 주어짐
-     * 각 사람이 주어질 때 인출에 걸리는 시간도 P가 주어짐
-     * 주어진 N을 P의 작은순으로 정렬 후 합
+     * 동전이 N개만큼 주어짐.
+     * 그 동전으로 만들어야할 합이 주어짐.
+     * N개 만큼 랜덤한 액수가 적힌 동전이 주어짐.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
 
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt(); // 사람 수
-        ArrayList<Integer> p = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        for (int i = 0; i < n; i++) {
-            p.add(sc.nextInt());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int totCoin = Integer.parseInt(st.nextToken()); // 코인 갯수
+        int goalPrice = Integer.parseInt(st.nextToken()); // 목표 금액
+        int sumCoin = 0; // 필요한 동전의 합계
+
+        Integer[] kinds = new Integer[totCoin];
+        for (int i = 0; i < totCoin; i++) {
+            kinds[i] = Integer.parseInt(br.readLine());
         }
 
-        Collections.sort(p);
+        Arrays.sort(kinds, Collections.reverseOrder());
 
-        int chainSum = 0;
-        int totSum = 0;
-        for (int num : p) {
-            chainSum += num;
-            totSum += chainSum;
+        for (int kind : kinds) {
+            if (kind < goalPrice) {
+                sumCoin += goalPrice / kind;
+                goalPrice = goalPrice % kind;
+            }
         }
-
-        System.out.println(totSum);
-
-
+        System.out.println(sumCoin);
     }
 }
