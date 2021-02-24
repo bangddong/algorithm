@@ -18,19 +18,19 @@ public class Main {
         int goalPrice = Integer.parseInt(st.nextToken()); // 목표 금액
         int sumCoin = 0; // 필요한 동전의 합계
 
-        Integer[] kinds = new Integer[totCoin];
+        int[] kinds = new int[totCoin];
         for (int i = 0; i < totCoin; i++) {
             kinds[i] = Integer.parseInt(br.readLine());
         }
 
-        Arrays.sort(kinds, Collections.reverseOrder());
-
-        for (int kind : kinds) {
-            if (kind < goalPrice) {
-                sumCoin += goalPrice / kind;
-                goalPrice = goalPrice % kind;
+        int count = 0;
+        for (int i = (totCoin - 1); i >= 0; i--) {
+            if (goalPrice >= kinds[i]) {
+                count += (goalPrice / kinds[i]);
+                goalPrice = (goalPrice % kinds[i]);
             }
         }
         System.out.println(sumCoin);
+        br.close();
     }
 }
