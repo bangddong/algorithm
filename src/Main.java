@@ -23,7 +23,7 @@ public class Main {
                 cnt++;
             }
         }
-        // 커밋 날라감
+        // 커밋 날라감 ㅠㅠ
         System.out.println(cnt);
 
     }
