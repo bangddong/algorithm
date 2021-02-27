@@ -1,57 +1,31 @@
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
 
 public class Main {
 
-    static BufferedWriter bw;
-    static StringTokenizer st ;
-
-    public static void main(String[] args) throws IOException {
-
+    // 1000에서 임의의 값을 빼고 남은값을
+    // 500, 100, 50, 10, 5, 1을 이용 가장 적게 뺀 수
+    public static void main(String[] args) throws NumberFormatException, IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
+        int n = 1000 - Integer.parseInt(br.readLine());
+        int cnt = 0;
 
-			/*
-			  time[][0] 은 시작시점을 의미
-			  time[][1] 은 종료시점을 의미
-			*/
-        int[][] time = new int[n][2];
-
-        StringTokenizer st;
-
-        for(int i = 0; i < n; i++) {
-            st = new StringTokenizer(br.readLine(), " ");
-            time[i][0] = Integer.parseInt(st.nextToken());	// 시작시간
-            time[i][1] = Integer.parseInt(st.nextToken());	// 종료시간
-        }
-
-        // 끝나는 시간을 기준으로 정렬하기 위해 compare 재정의
-        Arrays.sort(time, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                // 종료시간이 같을 경우 시작시간이 빠른순으로 정렬해야한다.
-                if(o1[1] == o2[1]) {
-                    return o1[0] - o2[0];
-                }
-                return o1[1] - o2[1];
-            }
-        });
-
-        int count = 0;
-        int prev_end_time = 0;
-
-        for(int i = 0; i < n; i++) {
-            // 직전 종료시간이 다음 회의 시작 시간보다 작거나 같다면 갱신
-            if(prev_end_time <= time[i][0]) {
-                prev_end_time = time[i][1];
-                count++;
+        while(n>0) {
+            if((n - 500) >= 0) {
+                n -= 500;
+                cnt++;
+            }else if((n - 100) >= 0) {
+                n -= 100;
+                cnt++;
+            }else if((n - 10) >= 0) {
+                n -= 10;
+                cnt++;
             }
         }
 
-        int ans = count;
-        System.out.println(ans);
+        System.out.println(cnt);
+
+
     }
 }
