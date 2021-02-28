@@ -1,30 +1,35 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
 
-    // 1000에서 임의의 값을 빼고 남은값을
-    // 500, 100, 50, 10, 5, 1을 이용 가장 적게 뺀 수
-    public static void main(String[] args) throws NumberFormatException, IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = 1000 - Integer.parseInt(br.readLine());
-        int cnt = 0;
+    public static void main(String[] args) throws IOException {
 
-        while(n>0) {
-            if((n - 500) >= 0) {
-                n -= 500;
-                cnt++;
-            }else if((n - 100) >= 0) {
-                n -= 100;
-                cnt++;
-            }else if((n - 10) >= 0) {
-                n -= 10;
-                cnt++;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int sum = Integer.MAX_VALUE;	// 초기 상태 여부 확인을 위한 값으로 설정
+        StringTokenizer subtraction = new StringTokenizer(br.readLine(), "-");
+
+        while (subtraction.hasMoreTokens()) {
+            int temp = 0;
+
+            // 뺄셈으로 나뉜 토큰을 덧셈으로 분리하여 해당 토큰들을 더한다.
+            StringTokenizer addition = new StringTokenizer(subtraction.nextToken(), "+");
+
+            // 덧셈으로 나뉜 토큰들을 모두 더한다.
+            while (addition.hasMoreTokens()) {
+                temp += Integer.parseInt(addition.nextToken());
+            }
+
+            // 첫 번째토큰인 경우 temp값이 첫 번째 수가 됨
+            if (sum == Integer.MAX_VALUE) {
+                sum = temp;
+            } else {
+                sum -= temp;
             }
         }
-        // 커밋 날라감 ㅠㅠ
-        System.out.println(cnt);
-
+        System.out.println(sum);
     }
 }
