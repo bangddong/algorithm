@@ -40,6 +40,7 @@ public class Boj_1991 {
         System.out.println(sb.toString());
     }
 
+    // 전위 순회
     static void preOrder(int x) {
         if (x == -1) return;
         // 현재 노드값 출력
@@ -49,7 +50,7 @@ public class Boj_1991 {
         // 오른쪽 자식 호출
         preOrder(tree[x][1]);
     }
-
+    // 중위 순회
     static void inOrder(int x) {
         if (x == -1) return;
         // 왼쪽 자식 호출
@@ -59,7 +60,7 @@ public class Boj_1991 {
         // 오른쪽 자식 호출
         inOrder(tree[x][1]);
     }
-
+    // 후위 순회
     static void postOrder(int x) {
         if (x == -1) return;
         // 왼쪽 자식 호출
