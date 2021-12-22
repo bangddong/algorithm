@@ -40,7 +40,7 @@ public class Boj_1240 {
         for (int i = 1; i <= N; i++) graph[i] = new ArrayList<>();
         for (int i = 1; i < N; i++) {
             st = new StringTokenizer(br.readLine());
-            // x좌표 y좌표 cost
+            // x좌표 y좌표 이동비용(cost)
             int x = Integer.parseInt(st.nextToken()), y = Integer.parseInt(st.nextToken()), c = Integer.parseInt(st.nextToken());
             // 무방향 그래프 생성
             graph[x].add(new Edge(y, c));
@@ -55,7 +55,7 @@ public class Boj_1240 {
 
     static void solution(int x, int y) {
         //DFS(x, -1, y, 0);
-        Arrays.fill(dist, Integer.MAX_VALUE);
+        Arrays.fill(dist, Integer.MAX_VALUE); // 비교를 위해 최대값으로 세팅
         dijkstra(x, y);
     }
 
@@ -76,13 +76,13 @@ public class Boj_1240 {
         dist[x] = 0;
         while (!pq.isEmpty()) {
             Edge tmp = pq.poll();
-            int now = tmp.y;
-            int nowCost = tmp.c;
-            if (nowCost > dist[now]) continue;
+            int now = tmp.y; // 정점번호
+            int nowCost = tmp.c; // now로 이동시의 비용
+            if (nowCost > dist[now]) continue; // 이미 계산되어 있는 비용보다 크다면 굳이 볼 필요 없다!
             for (Edge edge : graph[now]) {
-                if (dist[edge.y] > nowCost + edge.c) {
-                    dist[edge.y] = nowCost + edge.c;
-                    pq.offer(new Edge(edge.y, nowCost + edge.c));
+                if (dist[edge.y] > nowCost + edge.c) { // 이미 계산되어 있는 비용보다 더 적은 비용인가?
+                    dist[edge.y] = nowCost + edge.c; // 해당 정점까지의 비용을 기록한다!
+                    pq.offer(new Edge(edge.y, nowCost + edge.c)); // 새로 offer 할 때 비용을 누적하자!
                 }
             }
         }
