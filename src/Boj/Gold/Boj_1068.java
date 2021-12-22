@@ -49,7 +49,7 @@ public class Boj_1068 {
         for (int y : graph[x]) {
             if (y == parent) continue; // 위에서부터 내려왔으니 부모는 볼 필요가 없다!
             DFS(y, x);
-            leaf[x] += leaf[y]; // 단말노드에 도착하면 x에 누적하자!
+            leaf[x] += leaf[y]; // if문에 의해 1이 누적되었으니 그 값을 부모에 누적하자!
         }
     }
 }
