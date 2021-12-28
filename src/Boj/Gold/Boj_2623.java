@@ -43,16 +43,6 @@ public class Boj_2623 {
     }
 
     static void solution() {
-        BFS();
-        // 사이즈가 N개가 아니다 == 모든 가수의 순서를 정하지 못했다!
-        if(answer.size() != N) System.out.println(0);
-        else {
-            for (int x : answer) sb.append(x).append('\n');
-            System.out.println(sb.toString());
-        }
-    }
-
-    static void BFS() {
         Deque<Integer> queue = new LinkedList<>();
         for (int i = 1; i <= N; i++) {
             if (indeg[i] == 0) queue.add(i);
@@ -65,6 +55,13 @@ public class Boj_2623 {
                 indeg[y]--; // 방문했으니 들어가는 간선이 하나 줄어든다.
                 if (indeg[y] == 0) queue.add(y);
             }
+        }
+
+        // 사이즈가 N개가 아니다 == 모든 가수의 순서를 정하지 못했다!
+        if(answer.size() != N) System.out.println(0);
+        else {
+            for (int x : answer) sb.append(x).append('\n');
+            System.out.println(sb.toString());
         }
     }
 }

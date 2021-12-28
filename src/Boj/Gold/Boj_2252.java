@@ -34,11 +34,6 @@ public class Boj_2252 {
     }
 
     static void solution() {
-        BFS();
-        System.out.println(sb.toString());
-    }
-
-    static void BFS() {
         Deque<Integer> queue = new LinkedList<>();
 
         // 들어가는 간선이 없다면 누구든 앞에 갈 수 있다.
@@ -55,5 +50,6 @@ public class Boj_2252 {
                 if (indeg[y] == 0) queue.add(y);
             }
         }
+        System.out.println(sb.toString());
     }
 }
