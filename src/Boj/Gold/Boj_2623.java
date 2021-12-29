@@ -44,6 +44,7 @@ public class Boj_2623 {
 
     static void solution() {
         Deque<Integer> queue = new LinkedList<>();
+        // 들어오는 간선이 없는 노드를 추가한다.
         for (int i = 1; i <= N; i++) {
             if (indeg[i] == 0) queue.add(i);
         }
