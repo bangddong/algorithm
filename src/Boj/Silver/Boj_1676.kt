@@ -4,7 +4,7 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.util.*
 
-class Boj_1929_kt {
+class Boj_1676 {
     fun main() {
         val br = BufferedReader(InputStreamReader(System.`in`))
         val st = StringTokenizer(br.readLine())
