@@ -3,4 +3,5 @@
 .gitignore
 *.iml
 .idea
-Main
+src/Main.java
+src/Main.kt
