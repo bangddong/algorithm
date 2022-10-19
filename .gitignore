@@ -1,7 +1,0 @@
-# Project exclude paths
-/out/
-.gitignore
-*.iml
-.idea
-src/Main.java
-src/Main.kt
